@@ -4,7 +4,7 @@
 apt update
 
 # Instala o Git e o Node.js LTS
-apt install -y git nodejs npm
+apt install -y git nodejs
 
 # Obtendo repositório do bot
 git clone https://github.com/laxeder/vision-bot.git
