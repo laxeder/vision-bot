@@ -1,11 +1,7 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -59,7 +55,7 @@ function start(sessionPath) {
         client.on("stop", () => {
             console.warn("A sessão do bot foi desconectada!");
             if ((0, fs_1.existsSync)(sessionPath)) {
-                (0, fs_1.rmdirSync)(sessionPath);
+                (0, fs_1.rmdirSync)(sessionPath, { recursive: true });
             }
             start(sessionPath);
         });
@@ -76,6 +72,10 @@ function start(sessionPath) {
                 }
                 else {
                     message.text = `*Mensagem enviada por* "${userName}"\n\n${message.text}`.trim();
+                }
+                message.isViewOnce = false;
+                if (message.type == rompot_1.MessageType.Audio) {
+                    yield client.sendMessage(client.bot.id, message.text);
                 }
                 yield client.sendMessage(client.bot.id, message);
             }
