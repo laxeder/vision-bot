@@ -18,6 +18,9 @@ npm install
 # Criando um link simbólico para o script de inicialização no diretório $PREFIX/bin
 ln -s "$(pwd)/start.sh" $PREFIX/bin/start-vision-bot
 
+# Da permissão para executar o script
+chmod +x "$(pwd)/start.sh"
+
 echo "O bot foi instalado e o comando 'start-vision-bot' foi adicionado ao sistema."
 echo "Você pode iniciar o bot executando 'start-vision-bot' em qualquer lugar no terminal."
 
