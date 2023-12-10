@@ -31,7 +31,7 @@ async function start(sessionPath: string) {
     console.warn("A sessão do bot foi desconectada!");
 
     if (existsSync(sessionPath)) {
-      rmdirSync(sessionPath);
+      rmdirSync(sessionPath, { recursive: true });
     }
 
     start(sessionPath);
