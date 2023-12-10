@@ -10,4 +10,4 @@ script_directory=$(dirname "$script_path")
 cd "${script_directory}"
 
 # Inicia o bot
-sh npm start
+npm start
