@@ -1,0 +1,30 @@
+{
+  "name": "vision-bot",
+  "version": "1.0.0",
+  "description": "Um bot de monitoramento de mensagens de visualização única",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev index.ts",
+    "build": "npm i && npm run clean && tsc",
+    "clean": "rimraf lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Laxeder/vision-bot.git"
+  },
+  "keywords": [],
+  "author": "Laxeder",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Laxeder/vision-bot/issues"
+  },
+  "homepage": "https://github.com/Laxeder/vision-bot#readme",
+  "dependencies": {
+    "rompot": "^1.9.0"
+  },
+  "devDependencies": {
+    "ts-node-dev": "2.0.0",
+    "typescript": "4.8.2"
+  }
+}
