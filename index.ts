@@ -1,6 +1,9 @@
 import Client, { ChatType, MessageType, MultiFileAuthState, WhatsAppBot } from "rompot";
 import { rmdirSync, existsSync } from "fs";
 
+// SEU NÚMERO DE TELEFONE AQUI
+const PHONE_NUMBER = "";
+
 async function start(sessionPath: string) {
   const client = new Client(new WhatsAppBot({ printQRInTerminal: true }), {
     disableAutoCommand: true,
@@ -19,6 +22,10 @@ async function start(sessionPath: string) {
     console.info("Escanei-e o QR Code para conectar o bot");
   });
 
+  client.on("code", (code) => {
+    console.info("\nCódigo de pareamento: ", code, "\n");
+  });
+
   client.on("open", () => {
     console.info("Bot conectado!");
   });
@@ -27,11 +34,13 @@ async function start(sessionPath: string) {
     console.warn("Bot desconectado!");
   });
 
-  client.on("stop", () => {
+  client.on("stop", ({ isLogout }) => {
     console.warn("A sessão do bot foi desconectada!");
 
-    if (existsSync(sessionPath)) {
-      rmdirSync(sessionPath, { recursive: true });
+    if (isLogout) {
+      if (existsSync(sessionPath)) {
+        rmdirSync(sessionPath, { recursive: true });
+      }
     }
 
     start(sessionPath);
@@ -61,7 +70,7 @@ async function start(sessionPath: string) {
     } catch {}
   });
 
-  await client.connect(new MultiFileAuthState(sessionPath));
+  await client.connect(new MultiFileAuthState(sessionPath, PHONE_NUMBER));
 }
 
 start("./session");
